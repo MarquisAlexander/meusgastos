@@ -5,17 +5,18 @@ import { NavigationProp, useNavigation } from "@react-navigation/native";
 import { useForm } from "react-hook-form";
 import { Text, View } from "react-native";
 
-export interface FormLoginParams {
+interface FormRegisterParams {
   email: string;
+  name: string;
   password: string;
+  confirmPassword: string;
 }
-
-export const LoginForm = () => {
+export const RegisterForm = () => {
   const {
     control,
     handleSubmit,
     formState: { isSubmitting },
-  } = useForm<FormLoginParams>();
+  } = useForm<FormRegisterParams>();
 
   const navigation = useNavigation<NavigationProp<PublicStackParamsList>>();
 
@@ -23,33 +24,49 @@ export const LoginForm = () => {
     <>
       <AppInput
         control={control}
+        name="name"
+        leftIconName="person"
+        label="NOME"
+        placeholder="Seu nome"
+      />
+
+      <AppInput
+        control={control}
         name="email"
+        leftIconName="mail-outline"
         label="EMAIL"
         placeholder="email@example.com.br"
-        leftIconName="mail-outline"
       />
+
       <AppInput
         control={control}
         name="password"
+        leftIconName="lock-outline"
         label="SENHA"
         placeholder="Sua senha"
+      />
+
+      <AppInput
+        control={control}
+        name="confirmPassword"
         leftIconName="lock-outline"
-        secureTextEntry
+        label="SENHA"
+        placeholder="Confirme sua senha"
       />
 
       <View className="flex-1 justify-between mt-8 mb-6 min-h-[250px]">
-        <AppButton iconName="arrow-forward">Login</AppButton>
+        <AppButton iconName="arrow-forward">Cadastrar</AppButton>
 
         <View>
           <Text className="mb-6 text-gray-300 text-base">
-            Ainda não possui uma conta?
+            Já possui uma conta?
           </Text>
           <AppButton
             iconName="arrow-forward"
             mode="outline"
-            onPress={() => navigation.navigate("Register")}
+            onPress={() => navigation.navigate("Login")}
           >
-            Cadastrar
+            Acessar
           </AppButton>
         </View>
       </View>

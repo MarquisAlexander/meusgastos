@@ -1,9 +1,15 @@
-import { Text, View } from "react-native";
+import { AuthHeader } from "@/components/AuthHeader";
+import { DismissKeyboardView } from "@/components/DismissKeyboardView";
+import { View } from "react-native";
+import { RegisterForm } from "./RegisterForm";
 
 export default function Register() {
   return (
-    <View className="flex-1 items-center justify-center bg-white">
-      <Text className="text-xl font-bold text-blue-500">Tela de registro</Text>
-    </View>
+    <DismissKeyboardView>
+      <View className="flex-1 w-[82%] self-center">
+        <AuthHeader />
+        <RegisterForm />
+      </View>
+    </DismissKeyboardView>
   );
 }
