@@ -52,7 +52,11 @@ export const AuthContextProvider: FC<PropsWithChildren> = ({ children }) => {
     setToken(token);
   };
 
-  const handleLogout = async () => {};
+  const handleLogout = async () => {
+    await AsyncStorage.clear();
+    setToken(null);
+    setUser(null);
+  };
 
   const restoreUserSession = async () => {
     const userData = await AsyncStorage.getItem("dt-money-user");
@@ -67,7 +71,14 @@ export const AuthContextProvider: FC<PropsWithChildren> = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{ handleAuthenticate, handleLogout, handleRegister, token, user }}
+      value={{
+        handleAuthenticate,
+        handleLogout,
+        handleRegister,
+        token,
+        user,
+        restoreUserSession,
+      }}
     >
       {children}
     </AuthContext.Provider>
