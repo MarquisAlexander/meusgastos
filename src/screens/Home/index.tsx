@@ -6,7 +6,7 @@ export const Home = () => {
   return (
     <View>
       <Text>Home</Text>
-      <TouchableOpacity onPress={handleLogout}>
+      <TouchableOpacity onPress={handleLogout} className="mt-20">
         <Text>Sair</Text>
       </TouchableOpacity>
     </View>
