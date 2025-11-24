@@ -2,8 +2,11 @@ import { Image, Text, TouchableOpacity, View } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import { colors } from "@/shared/colors";
 import { useAuthContext } from "@/context/auth.context";
+import { NewTransaction } from "../NewTransaction";
+import { useBottomSheetContext } from "@/context/bottomSheet.context";
 export const AppHeader = () => {
   const { handleLogout } = useAuthContext();
+  const { openBottomSheet } = useBottomSheetContext();
 
   return (
     <View className="w-full flex-row p-8 justify-between">
@@ -22,7 +25,12 @@ export const AppHeader = () => {
         </TouchableOpacity>
       </View>
 
-      <TouchableOpacity className="bg-accent-brand w-[130px] items-center justify-center rounded-xl h-[50px]">
+      <TouchableOpacity
+        onPress={() => {
+          openBottomSheet(<NewTransaction />, 0);
+        }}
+        className="bg-accent-brand w-[130px] items-center justify-center rounded-xl h-[50px]"
+      >
         <Text className="text-white font-bold text-sm">Nova transação</Text>
       </TouchableOpacity>
     </View>
