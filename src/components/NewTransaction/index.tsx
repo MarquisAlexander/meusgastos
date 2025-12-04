@@ -10,6 +10,7 @@ import { SelectCategoryModal } from "../SelectCategoryModal";
 import * as Yup from "yup";
 import { transactionSchema } from "./schema";
 import { AppButton } from "../AppButton";
+import { ErrorMessage } from "../ErrorMessage";
 
 type ValidationErrorsTypes = Record<keyof CreateTransactionInterface, string>;
 export const NewTransaction = () => {
@@ -68,6 +69,9 @@ export const NewTransaction = () => {
           placeholderTextColor={colors.gray["700"]}
           className="text-white text-lg h-[50px] bg-background-primary my-2 rounded-[6] pl-4"
         />
+        {validationErrors?.description && (
+          <ErrorMessage>{validationErrors.description}</ErrorMessage>
+        )}
         <CurrencyInput
           value={transaction.value}
           prefix="R$ "
@@ -78,19 +82,25 @@ export const NewTransaction = () => {
           onChangeValue={(value) => setTransactionData("value", value ?? 0)}
           className="text-white text-lg h-[50px] bg-background-primary my-2 rounded-[6] pl-4"
         />
-
+        {validationErrors?.value && (
+          <ErrorMessage>{validationErrors?.value}</ErrorMessage>
+        )}
         <SelectCategoryModal
           selectedCategory={transaction.categoryId}
           onSelect={(categoryId) =>
             setTransactionData("categoryId", categoryId)
           }
         />
-
+        {validationErrors?.categoryId && (
+          <ErrorMessage>{validationErrors.categoryId}</ErrorMessage>
+        )}
         <TransactionTypeSelector
           typeId={transaction.typeId}
           setTransactionType={(typeId) => setTransactionData("typeId", typeId)}
         />
-
+        {validationErrors?.typeId && (
+          <ErrorMessage>{validationErrors?.typeId}</ErrorMessage>
+        )}
         <View className="my-4">
           <AppButton onPress={handleCreateTransaction}>Registrar</AppButton>
         </View>
